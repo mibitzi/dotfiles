@@ -2,9 +2,11 @@ import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.InsertPosition
+import XMonad.Hooks.ManageHelpers
 import XMonad.Util.Run
 import XMonad.Actions.WorkspaceNames
 import XMonad.Prompt
+import XMonad.Layout.NoBorders
 
 import System.Exit
 
@@ -45,8 +47,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
 -- Manage hook
 myManageHook = composeAll
-    [ role =? "Preferences" --> doFloat
-    , role =? "pop-up" --> doFloat
+    [ isFullscreen --> doFullFloat
+    , isDialog --> doCenterFloat
+    , role =? "Preferences" --> doFloat
     , className =? "Pidgin" --> doFloat
     , className =? "Lxappereance" --> doFloat
     , className =? "Skype" --> doFloat
@@ -74,7 +77,7 @@ main = do
                            , borderWidth = myBorderWidth
                            , focusedBorderColor = myFocusedBorderColor
                            , manageHook=myManageHook <+> manageHook defaultConfig
-                           , layoutHook=avoidStruts $ layoutHook defaultConfig
+                           , layoutHook=smartBorders . avoidStruts $ layoutHook defaultConfig
                            , logHook = myLogHook xmobarPipe
                            , keys = \c -> myKeys c `M.union` keys defaultConfig c
                            }
