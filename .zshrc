@@ -54,10 +54,6 @@ alias mv="mv -i"
 alias rm="rm -i"
 #}}}
 
-#{{{ Terminal
-export TERM=xterm-256color
-#}}}
-
 #{{{ Ibus
 export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus

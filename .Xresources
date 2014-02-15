@@ -1,10 +1,12 @@
 URxvt.transparent: true
 URxvt.shading: 20
-URxvt.scrollstyle: plain
+URxvt.scrollBar: false
 URxvt.scrollTtyOutput: false
 URxvt.scrollWithBuffer: true
 URxvt.scrollTtyKeypress: true
 URxvt.saveLines: 10000
+
+URxvt.termName: xterm
 
 URxvt.font: xft:Droid Sans Mono:size=10
 
