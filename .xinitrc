@@ -14,6 +14,8 @@ ibus-daemon -drx
 
 setxkbmap -option caps:swapescape -layout 'ch' -variant 'de_nodeadkeys'
 
+xsetroot -cursor_name left_ptr
+
 #feh --bg-scale ~/img/bg/Untitled_Variations_One_by_DrValentine.png
 
 trayer --edge top --align right --SetPartialStrut true --expand true --widthtype percent --width 4 --transparent true --tint 0x000000 --height 14 --monitor 0 &
