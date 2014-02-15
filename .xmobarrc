@@ -1,7 +1,7 @@
 Config { font = "-misc-fixed-*-*-*-*-10-*-*-*-*-*-*-*"
         , bgColor = "black"
         , fgColor = "grey"
-        , position = TopW L 96
+        , position = TopW L 97
         , commands = [ Run StdinReader
         , Run Weather "LSZH" ["-t","<station>: <tempC>C","-L","18","-H","25","--normal","green","--high","red","--low","lightblue"] 36000
         , Run Memory ["-t","Mem: <usedratio>%"] 10
@@ -12,5 +12,5 @@ Config { font = "-misc-fixed-*-*-*-*-10-*-*-*-*-*-*-*"
         ]
         , sepChar = "%"
         , alignSep = "}{"
-        , template = "%StdinReader% }{ %uname% | Load: %loadavg% | %memory% | %disku% | %LSZH% | <fc=#ffaf00>%date%</fc>"
+        , template = "%StdinReader% }{ %uname% | Load: %loadavg% | %memory% | %disku% | %LSZH% | <fc=#ffaf00>%date%</fc>   "
 }
