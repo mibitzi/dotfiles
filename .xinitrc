@@ -5,16 +5,20 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
   unset f
 fi
 
-xrandr --output HDMI1 --mode 1920x1080 --left-of HDMI3 --output HDMI3 --mode 1920x1080
-xset s 0 0
+xrandr --output DVI-I-0 --right-of DVI-I-1
+
 xset -b
+xset s 0 0
+xset -dpms
+ibus-daemon -drx
 
 setxkbmap -option caps:swapescape -layout 'ch' -variant 'de_nodeadkeys'
 
-ibus-daemon -drx
-
 #feh --bg-scale ~/img/bg/Untitled_Variations_One_by_DrValentine.png
 
+trayer --edge top --align right --SetPartialStrut true --expand true --widthtype percent --width 4 --transparent true --tint 0x000000 --height 14 --monitor 0 &
+
+unclutter -noevents -grab &
+
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
-#exec pwm
-exec i3
+exec xmonad
