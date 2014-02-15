@@ -62,7 +62,7 @@ myLogHook handle = workspaceNamesPP defaultPP
     , ppCurrent = \wsID -> "<fc=#FFAF00>[" ++ wsID ++ "]</fc>"
     , ppUrgent = \wsID -> "<fc=#FF0000>" ++ wsID ++ "</fc>"
     , ppSep = " | "
-    , ppTitle = \wTitle -> "<fc=#92FF00>" ++ wTitle ++ "</fc>"
+    , ppTitle = \wTitle -> "<fc=#92FF00>" ++ shorten 50 wTitle ++ "</fc>"
     } >>= dynamicLogWithPP
 
 -- Main config
