@@ -23,6 +23,10 @@ myTerminal = "urxvt"
 myBorderWidth = 1
 myFocusedBorderColor = "#0088CC"
 
+-- Workspaces
+myWorkspaces :: [WorkspaceId]
+myWorkspaces = map show [1 .. 9 :: Int] ++ ["0", "'", "^"]
+
 -- Keybindings
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- Launch terminal
@@ -44,6 +48,22 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- Rename workspace
     , ((modMask,               xK_n     ), renameWorkspace defaultXPConfig)
     ]
+    ++
+    -- Workspaces
+    [((m .|. modMask, k), windows $ f i)
+        | (i, k) <- zip (XMonad.workspaces conf) [xK_1
+                                                 , xK_2
+                                                 , xK_3
+                                                 , xK_4
+                                                 , xK_5
+                                                 , xK_6
+                                                 , xK_7
+                                                 , xK_8
+                                                 , xK_9
+                                                 , xK_0
+                                                 , xK_apostrophe
+                                                 , xK_asciicircum]
+        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
 
 -- Manage hook
 myManageHook = composeAll
@@ -76,6 +96,7 @@ main = do
                            , modMask = myModMask
                            , borderWidth = myBorderWidth
                            , focusedBorderColor = myFocusedBorderColor
+                           , workspaces = myWorkspaces
                            , manageHook=myManageHook <+> manageHook defaultConfig
                            , layoutHook=smartBorders . avoidStruts $ layoutHook defaultConfig
                            , logHook = myLogHook xmobarPipe
