@@ -24,7 +24,6 @@ myBorderWidth = 1
 myFocusedBorderColor = "#0088CC"
 
 -- Workspaces
-myWorkspaces :: [WorkspaceId]
 myWorkspaces = map show [1 .. 9 :: Int] ++ ["0", "'", "^"]
 
 -- Keybindings
@@ -75,7 +74,6 @@ myManageHook = composeAll
     , className =? "Skype" --> doFloat
     , className =? "Vlc" --> doFloat
     , manageDocks
-    , insertPosition End Newer
     ]
     where role = stringProperty "WM_WINDOW_ROLE"
 
