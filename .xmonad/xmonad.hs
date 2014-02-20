@@ -3,6 +3,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.Place
 import XMonad.Util.Run
 import XMonad.Actions.WorkspaceNames
 import XMonad.Prompt
@@ -74,8 +75,10 @@ myManageHook = composeAll
     , className =? "Lxappereance" --> doFloat
     , className =? "Skype" --> doFloat
     , className =? "Vlc" --> doFloat
+    , title =? "Cocos2dx-Linux" --> doFloat
     , manageDocks
-    , insertPosition End Newer
+    , placeHook $ smart (0.5, 0.5)
+    -- , insertPosition End Newer
     ]
     where role = stringProperty "WM_WINDOW_ROLE"
 
