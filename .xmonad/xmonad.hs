@@ -25,7 +25,6 @@ myBorderWidth = 1
 myFocusedBorderColor = "#0088CC"
 
 -- Workspaces
-myWorkspaces :: [WorkspaceId]
 myWorkspaces = map show [1 .. 9 :: Int] ++ ["0", "'", "^"]
 
 -- Keybindings
@@ -77,8 +76,11 @@ myManageHook = composeAll
     , className =? "Vlc" --> doFloat
     , title =? "Cocos2dx-Linux" --> doFloat
     , manageDocks
+<<<<<<< HEAD
     , placeHook $ smart (0.5, 0.5)
     -- , insertPosition End Newer
+=======
+>>>>>>> a9ed7acc9f28df5719c2e725a836a127afbe4be1
     ]
     where role = stringProperty "WM_WINDOW_ROLE"
 

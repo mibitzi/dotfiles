@@ -8,7 +8,7 @@ Config { font = "-misc-fixed-*-*-*-*-10-*-*-*-*-*-*-*"
         , Run Com "uname" ["-s","-r"] "" 36000
         , Run Com "sh" ["-c", "cat /proc/loadavg | awk '{print $1,$2,$3}'"] "loadavg" 10
         , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
-        , Run DiskU [("/", "/ <freep>%"), ("/home", "/home <freep>%")] [] 20
+        , Run DiskU [("/", "/ <usedp>%"), ("/home", "/home <usedp>%")] [] 20
         ]
         , sepChar = "%"
         , alignSep = "}{"
