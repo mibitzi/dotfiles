@@ -18,6 +18,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'tmhedberg/matchit'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
+Plugin 'pangloss/vim-javascript'
 
 call vundle#end()
 
@@ -44,7 +45,7 @@ set listchars=nbsp:¬,tab:»·,trail:·
 "
 set t_Co=256
 "colorscheme molokai
-"
+
 colorscheme mustang
 hi CursorLine cterm=NONE
 
@@ -154,3 +155,26 @@ function! NumberToggle()
 endfunc
 
 nnoremap <C-n> :call NumberToggle()<cr>
+
+"
+" Airline
+"
+set laststatus=2
+set ttimeoutlen=50
+let g:bufferline_echo = 0
+let g:airline_powerline_fonts = 0
+let g:airline_theme = 'badwolf'
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = 'ln:'
+let g:airline_symbols.branch = 'br:'
+let g:airline_symbols.paste = 'paste'
+let g:airline_symbols.whitespace = 'Ξ'
