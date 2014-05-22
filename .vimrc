@@ -178,3 +178,14 @@ let g:airline_symbols.linenr = 'ln:'
 let g:airline_symbols.branch = 'br:'
 let g:airline_symbols.paste = 'paste'
 let g:airline_symbols.whitespace = 'Ξ'
+
+
+"
+" Websearch
+"
+command! -nargs=1 Browser
+            \ | execute ':silent !xdg-open "'.<q-args>.'"'
+            \ | execute ':redraw!'
+
+nnoremap <Leader>sp :Browser http://php.net/
+nnoremap <Leader>sg :Browser http://google.com/?q=
