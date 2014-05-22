@@ -33,15 +33,22 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set showmatch
-set number
 set title
 set cursorline
 set list
 set listchars=nbsp:¬,tab:»·,trail:·
-set background=dark
 
+
+"
+" Style
+"
 set t_Co=256
-colorscheme xoria256
+"colorscheme molokai
+"
+colorscheme mustang
+hi CursorLine cterm=NONE
+
+"colorscheme xoria256
 hi Normal ctermbg=NONE
 hi NonText ctermbg=NONE
 
@@ -50,6 +57,8 @@ hi NonText ctermbg=NONE
 highlight OverLength ctermbg=52 ctermfg=white
 match OverLength /\%>79v.\+/
 
+
+" Python
 autocmd FileType python setlocal nosmartindent
 "autocmd BufWritePost *.py call Flake8()
 
@@ -129,3 +138,19 @@ map <Leader>h <Plug>(easymotion-linebackward)
 let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 
 let g:EasyMotion_smartcase = 1
+
+
+"
+" Line numbers
+"
+set number
+set relativenumber
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set norelativenumber
+  else
+    set relativenumber
+  endif
+endfunc
+
+nnoremap <C-n> :call NumberToggle()<cr>
