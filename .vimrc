@@ -1,12 +1,29 @@
+set nocompatible
 filetype off
 
-call pathogen#infect()
-call pathogen#helptags()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'gmarik/Vundle.vim'
+
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'SirVer/ultisnips'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'bling/vim-airline'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'kien/ctrlp.vim'
+Plugin 'klen/python-mode'
+Plugin 'mattn/emmet-vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'tmhedberg/matchit'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+
+call vundle#end()
 
 filetype plugin indent on
 syntax on
 
-set nocompatible
 set backup
 set backupdir=~/.vim/backup
 set directory=~/.vim/tmp
@@ -19,7 +36,8 @@ set showmatch
 set number
 set title
 set cursorline
-"set mouse=a
+set list
+set listchars=nbsp:¬,tab:»·,trail:·
 set background=dark
 
 set t_Co=256
@@ -35,6 +53,9 @@ match OverLength /\%>79v.\+/
 autocmd FileType python setlocal nosmartindent
 "autocmd BufWritePost *.py call Flake8()
 
+"
+" pymode
+"
 "let g:pymode = 1
 let g:pymode_trim_whitespaces = 1
 let g:pymode_options = 1
@@ -57,6 +78,9 @@ autocmd BufRead,BufNewFile *.html set filetype=htmldjango
 autocmd BufWritePre * :%s/\s\+$//e
 autocmd BufWritePre * :%s/^\s\+$//e
 
+"
+" Leader
+"
 let mapleader=","
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>e :Explore<CR>
@@ -64,7 +88,9 @@ vnoremap v <ESC>
 
 nnoremap <Leader>f :CtrlP<CR>
 
+"
 " CtrlP
+"
 let g:ctrlp_custom_ignore = {
   \ 'dir': '\v[\/]((\.(git|hg|svn))|venv[a-z0-9-]*|__pycache__)$',
   \ 'file': '\v\.(exe|so|dll|pyc|o)$'
@@ -86,3 +112,20 @@ function! Tab_Or_Complete()
 endfunction
 :inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
 
+"
+" EasyMotion
+"
+nmap <Leader><Leader>s <Plug>(easymotion-s2)
+nmap <Leader><Leader>t <Plug>(easymotion-t2)
+
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+
+let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
+
+let g:EasyMotion_smartcase = 1
