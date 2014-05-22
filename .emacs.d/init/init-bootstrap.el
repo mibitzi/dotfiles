@@ -12,8 +12,17 @@
 (el-get 'sync)
 
 (defvar my-packages '(el-get
-                      evil evil-surround
+                      evil evil-surround evil-leader
                       web-mode
                       php-mode))
 
 (el-get 'sync my-packages)
+
+;; Save all tempfiles in $TMPDIR/emacs$UID/
+(defconst emacs-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)))
+(setq backup-directory-alist
+      `((".*" . ,emacs-tmp-dir)))
+(setq auto-save-file-name-transforms
+      `((".*" ,emacs-tmp-dir t)))
+(setq auto-save-list-file-prefix
+      emacs-tmp-dir)
