@@ -38,6 +38,7 @@ set title
 set cursorline
 set list
 set listchars=nbsp:¬,tab:»·,trail:·
+set background=dark
 
 
 "
@@ -50,8 +51,10 @@ colorscheme mustang
 hi CursorLine cterm=NONE
 
 "colorscheme xoria256
-hi Normal ctermbg=NONE
-hi NonText ctermbg=NONE
+:let g:zenburn_high_Contrast = 1
+"colorscheme zenburn
+"hi Normal ctermbg=NONE
+"hi NonText ctermbg=NONE
 
 "highlight ColorColumn ctermbg=233 guibg=#2c2d27
 "set colorcolumn=80
@@ -163,7 +166,7 @@ set laststatus=2
 set ttimeoutlen=50
 let g:bufferline_echo = 0
 let g:airline_powerline_fonts = 0
-let g:airline_theme = 'badwolf'
+let g:airline_theme = 'zenburn'
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
