@@ -12,7 +12,6 @@
 (el-get 'sync)
 
 (defvar my-packages '(el-get
-                      evil evil-surround evil-leader
                       web-mode
                       php-mode))
 
