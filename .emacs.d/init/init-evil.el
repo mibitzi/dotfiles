@@ -13,14 +13,14 @@
 
 (evil-leader/set-leader ",")
 (evil-leader/set-key
-  "f" 'find-file
+  "f" 'projectile-find-file
+  "e" 'dired-jump
   "w" 'save-buffer
   "b" 'buffer-menu
   "x" 'execute-extended-command)
 
 
 ;;; esc quits
-
 (define-key evil-normal-state-map [escape] 'keyboard-quit)
 (define-key evil-visual-state-map [escape] 'keyboard-quit)
 (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)

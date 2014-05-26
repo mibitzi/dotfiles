@@ -14,6 +14,7 @@
 (defvar my-packages '(el-get
                       color-theme
                       projectile grizzl
+		      magit
                       evil evil-surround evil-leader
                       web-mode
                       php-mode))
