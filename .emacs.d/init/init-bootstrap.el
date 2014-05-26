@@ -12,6 +12,8 @@
 (el-get 'sync)
 
 (defvar my-packages '(el-get
+                      color-theme
+                      projectile grizzl
                       evil evil-surround evil-leader
                       web-mode
                       php-mode))

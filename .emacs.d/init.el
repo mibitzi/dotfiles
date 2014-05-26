@@ -4,6 +4,7 @@
 
 (mapc 'require '(init-bootstrap
                  init-appearance
+                 init-projectile
                  init-evil
                  init-webmode
                  init-php
