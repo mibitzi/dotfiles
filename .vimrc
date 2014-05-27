@@ -20,6 +20,7 @@ Plugin 'tmhedberg/matchit'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'pangloss/vim-javascript'
+Plugin 'sjl/gundo.vim'
 
 call vundle#end()
 
@@ -100,8 +101,6 @@ nnoremap <Leader>w :w<CR>
 nnoremap <Leader>e :Explore<CR>
 vnoremap v <ESC>
 
-nnoremap <Leader>f :CtrlP<CR>
-
 "
 " CtrlP
 "
@@ -110,21 +109,8 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll|pyc|o)$'
   \ }
 
-"Use TAB to complete when typing words, else inserts TABs as usual.
-"Uses dictionary and source files to find matching words to complete.
-"See help completion for source,
-"Note: usual completion is on <C-n> but more trouble to press all the time.
-"Never type the same word twice and maybe learn a new spellings!
-"Use the Linux dictionary when spelling is in doubt.
-"Window users can copy the file to their machine.
-"function! Tab_Or_Complete()
-"  if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
-"    return "\<C-N>"
-"  else
-"    return "\<Tab>"
-"  endif
-"endfunction
-":inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
+nnoremap <Leader>f :CtrlP<CR>
+
 
 "
 " EasyMotion
@@ -201,3 +187,9 @@ nnoremap <Leader>sg :Browser http://google.com/?q=
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+
+"
+" Gundo
+"
+nnoremap <Leader>g :GundoToggle<Cr>
