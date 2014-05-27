@@ -12,9 +12,9 @@
 (el-get 'sync)
 
 (defvar my-packages '(el-get
-                      color-theme
-                      projectile grizzl
-		      magit
+                      color-theme monokai-theme color-theme-zenburn
+                      projectile flx ido-vertical-mode
+                      magit
                       evil evil-surround evil-leader
                       web-mode
                       php-mode))
