@@ -21,6 +21,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'pangloss/vim-javascript'
 Plugin 'sjl/gundo.vim'
+Plugin 'scrooloose/syntastic'
 
 call vundle#end()
 
@@ -115,19 +116,17 @@ nnoremap <Leader>f :CtrlP<CR>
 "
 " EasyMotion
 "
-nmap <Leader><Leader>s <Plug>(easymotion-s2)
-nmap <Leader><Leader>t <Plug>(easymotion-t2)
+"nmap <Leader>m <Plug>(easymotion-s2)
 
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 
-map <Leader>l <Plug>(easymotion-lineforward)
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-map <Leader>h <Plug>(easymotion-linebackward)
+"map <Leader>l <Plug>(easymotion-lineforward)
+"map <Leader>j <Plug>(easymotion-j)
+"map <Leader>k <Plug>(easymotion-k)
+"map <Leader>h <Plug>(easymotion-linebackward)
 
 let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
-
 let g:EasyMotion_smartcase = 1
 
 
