@@ -6,12 +6,13 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.Place
 import XMonad.Util.Run
 import XMonad.Actions.WorkspaceNames
-import XMonad.Actions.Search
 import XMonad.Prompt
 import XMonad.Layout.NoBorders
 
 import System.Exit
 
+import qualified XMonad.Actions.Search as S
+import qualified XMonad.Actions.Submap as SM
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
@@ -31,7 +32,14 @@ myWorkspaces = map show [1 .. 9 :: Int] ++ ["0", "'", "^"]
 
 -- Browser
 myBrowser = "chromium"
-myJiraSearchEngine = searchEngine "Jira" "http://jira.futuretek.ch/browse/"
+myJiraSearchEngine = S.searchEngine "Jira" "http://jira.futuretek.ch/browse/"
+myPhpSearchEngine = S.searchEngine "PHP" "http://php.net/"
+
+mySearchEngineMap method = M.fromList $
+    [ ((0, xK_g), method S.google)
+    , ((0, xK_j), method myJiraSearchEngine)
+    , ((0, xK_p), method myPhpSearchEngine)
+    ]
 
 -- Keybindings
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
@@ -54,9 +62,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- Rename workspace
     , ((modMask,               xK_n     ), renameWorkspace defaultXPConfig)
 
-    -- Web search
-    , ((modMask,               xK_s     ), promptSearchBrowser defaultXPConfig myBrowser google)
-    , ((modMask,               xK_t     ), promptSearchBrowser defaultXPConfig myBrowser myJiraSearchEngine)
+    -- Search commands
+    , ((modMask, xK_s), SM.submap $ mySearchEngineMap $ S.promptSearchBrowser defaultXPConfig myBrowser)
+    , ((modMask .|. shiftMask, xK_s), SM.submap $ mySearchEngineMap $ S.selectSearchBrowser myBrowser)
     ]
     ++
     -- Workspaces
