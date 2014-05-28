@@ -6,6 +6,7 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.Place
 import XMonad.Util.Run
 import XMonad.Actions.WorkspaceNames
+import XMonad.Actions.Search
 import XMonad.Prompt
 import XMonad.Layout.NoBorders
 
@@ -25,7 +26,11 @@ myBorderWidth = 1
 myFocusedBorderColor = "#0088CC"
 
 -- Workspaces
+myWorkspaces :: [WorkspaceId]
 myWorkspaces = map show [1 .. 9 :: Int] ++ ["0", "'", "^"]
+
+-- Browser
+myBrowser = "chromium"
 
 -- Keybindings
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
@@ -47,6 +52,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- Rename workspace
     , ((modMask,               xK_n     ), renameWorkspace defaultXPConfig)
+
+    -- Google search
+    , ((modMask,               xK_s     ), promptSearchBrowser defaultXPConfig myBrowser google)
     ]
     ++
     -- Workspaces
@@ -76,11 +84,8 @@ myManageHook = composeAll
     , className =? "Vlc" --> doFloat
     , title =? "Cocos2dx-Linux" --> doFloat
     , manageDocks
-<<<<<<< HEAD
     , placeHook $ smart (0.5, 0.5)
     -- , insertPosition End Newer
-=======
->>>>>>> a9ed7acc9f28df5719c2e725a836a127afbe4be1
     ]
     where role = stringProperty "WM_WINDOW_ROLE"
 

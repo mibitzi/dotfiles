@@ -39,15 +39,18 @@ set expandtab
 set showmatch
 set title
 set cursorline
+
+" Show whitespaces
 set list
 set listchars=nbsp:¬,tab:»·,trail:·
-set background=dark
 
 
 "
 " Style
 "
+set background=dark
 set t_Co=256
+
 "colorscheme molokai
 
 colorscheme mustang
@@ -110,7 +113,7 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll|pyc|o)$'
   \ }
 
-nnoremap <Leader>f :CtrlP<CR>
+nnorema <Leader>f :CtrlPMixed<CR>
 
 
 "
@@ -143,7 +146,7 @@ function! NumberToggle()
   endif
 endfunc
 
-nnoremap <C-n> :call NumberToggle()<cr>
+nnoremap <C-l> :call NumberToggle()<cr>
 
 "
 " Airline
