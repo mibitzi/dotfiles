@@ -31,6 +31,7 @@ myWorkspaces = map show [1 .. 9 :: Int] ++ ["0", "'", "^"]
 
 -- Browser
 myBrowser = "chromium"
+myJiraSearchEngine = searchEngine "Jira" "http://jira.futuretek.ch/browse/"
 
 -- Keybindings
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
@@ -53,8 +54,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- Rename workspace
     , ((modMask,               xK_n     ), renameWorkspace defaultXPConfig)
 
-    -- Google search
+    -- Web search
     , ((modMask,               xK_s     ), promptSearchBrowser defaultXPConfig myBrowser google)
+    , ((modMask,               xK_t     ), promptSearchBrowser defaultXPConfig myBrowser myJiraSearchEngine)
     ]
     ++
     -- Workspaces
