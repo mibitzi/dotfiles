@@ -44,6 +44,8 @@ plugins=(git vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
+[ -f ~/.dircolors ] && eval $(dircolors ~/.dircolors)
+
 #{{{ zsh
 setopt no_share_history
 #}}}
