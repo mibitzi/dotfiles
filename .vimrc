@@ -22,6 +22,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'pangloss/vim-javascript'
 Plugin 'sjl/gundo.vim'
 Plugin 'scrooloose/syntastic'
+Plugin 'evidens/vim-twig'
 
 call vundle#end()
 
@@ -39,6 +40,7 @@ set expandtab
 set showmatch
 set title
 set cursorline
+set incsearch
 
 " Show whitespaces
 set list
@@ -59,8 +61,8 @@ hi CursorLine cterm=NONE
 "colorscheme xoria256
 :let g:zenburn_high_Contrast = 1
 "colorscheme zenburn
-"hi Normal ctermbg=NONE
-"hi NonText ctermbg=NONE
+hi Normal ctermbg=NONE
+hi NonText ctermbg=NONE
 
 "highlight ColorColumn ctermbg=233 guibg=#2c2d27
 "set colorcolumn=80
@@ -81,7 +83,7 @@ let g:pymode_options = 1
 let g:pymode_folding = 0
 let g:pymode_motion = 1
 let g:pymode_virtualenv = 0
-"let g:pymode_rope = 1
+let g:pymode_rope = 0
 let g:pymode_rope_completion = 0
 "let g:pymode_lint = 1
 let g:pymode_lint_on_write = 1
@@ -109,11 +111,11 @@ vnoremap v <ESC>
 " CtrlP
 "
 let g:ctrlp_custom_ignore = {
-  \ 'dir': '\v[\/]((\.(git|hg|svn))|venv[a-z0-9-]*|__pycache__)$',
-  \ 'file': '\v\.(exe|so|dll|pyc|o)$'
+  \ 'dir': '\v[\/]((\.(git|hg|svn))|venv[a-z0-9-]*|__pycache__|reports\/test)$',
+  \ 'file': '\v\.(exe|so|dll|pyc|o|class|jar)$'
   \ }
 
-nnorema <Leader>f :CtrlPMixed<CR>
+nnorema <Leader>f :CtrlP<CR>
 
 
 "
@@ -121,8 +123,11 @@ nnorema <Leader>f :CtrlPMixed<CR>
 "
 "nmap <Leader>m <Plug>(easymotion-s2)
 
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
+"map  / <Plug>(easymotion-sn)
+"omap / <Plug>(easymotion-tn)
+
+nmap <SPACE> <Plug>(easymotion-s2)
+"nmap t <Plug>(easymotion-t2)
 
 "map <Leader>l <Plug>(easymotion-lineforward)
 "map <Leader>j <Plug>(easymotion-j)
@@ -137,14 +142,14 @@ let g:EasyMotion_smartcase = 1
 " Line numbers
 "
 set number
-set relativenumber
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set norelativenumber
-  else
-    set relativenumber
-  endif
-endfunc
+"set relativenumber
+"function! NumberToggle()
+"  if(&relativenumber == 1)
+"    set norelativenumber
+"  else
+"    set relativenumber
+"  endif
+"endfunc
 
 nnoremap <C-l> :call NumberToggle()<cr>
 
@@ -155,7 +160,7 @@ set laststatus=2
 set ttimeoutlen=50
 let g:bufferline_echo = 0
 let g:airline_powerline_fonts = 0
-let g:airline_theme = 'zenburn'
+"let g:airline_theme = 'zenburn'
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -175,12 +180,19 @@ let g:airline_symbols.whitespace = 'Ξ'
 "
 " UltiSnip
 "
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 
 
 "
 " Gundo
 "
 nnoremap <Leader>g :GundoToggle<Cr>
+
+
+"
+" YouCompleteMe
+"
+set completeopt=menu,menuone
+let g:EclimCompletionMethod = 'omnifunc'

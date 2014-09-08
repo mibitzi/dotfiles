@@ -20,7 +20,7 @@ import qualified Data.Map        as M
 myModMask = mod4Mask
 
 -- Terminal
-myTerminal = "urxvt"
+myTerminal = "termite"
 
 -- Borders
 myBorderWidth = 1
