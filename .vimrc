@@ -111,7 +111,7 @@ vnoremap v <ESC>
 " CtrlP
 "
 let g:ctrlp_custom_ignore = {
-  \ 'dir': '\v[\/]((\.(git|hg|svn))|venv[a-z0-9-]*|__pycache__|reports\/test)$',
+  \ 'dir': '\v[\/]((\.(git|hg|svn))|venv[a-z0-9-]*|__pycache__|node_modules|reports\/test)$',
   \ 'file': '\v\.(exe|so|dll|pyc|o|class|jar)$'
   \ }
 
