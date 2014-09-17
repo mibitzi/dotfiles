@@ -90,7 +90,9 @@ let g:pymode_lint_on_write = 1
 let g:pymode_lint_on_fly = 0
 "let g:pymode_lint_checkers = ['pep8', 'mccabe']
 
-autocmd BufWritePre *.go Fmt
+" Go
+autocmd FileType go set noexpandtab nolist
+autocmd BufWritePre *.go silent Fmt
 
 " Django
 autocmd BufRead,BufNewFile *.html set filetype=htmldjango
