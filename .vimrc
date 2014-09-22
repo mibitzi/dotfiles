@@ -23,6 +23,8 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'sjl/gundo.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'evidens/vim-twig'
+Plugin 'wting/rust.vim'
+Plugin 'fatih/vim-go'
 
 call vundle#end()
 
@@ -92,7 +94,8 @@ let g:pymode_lint_on_fly = 0
 
 " Go
 autocmd FileType go set noexpandtab nolist
-autocmd BufWritePre *.go silent Fmt
+"autocmd BufWritePre *.go silent Fmt
+let g:go_fmt_fail_silently = 0
 
 " Django
 autocmd BufRead,BufNewFile *.html set filetype=htmldjango
