@@ -25,6 +25,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'evidens/vim-twig'
 Plugin 'wting/rust.vim'
 Plugin 'fatih/vim-go'
+Plugin 'jiangmiao/auto-pairs'
 
 call vundle#end()
 
@@ -68,8 +69,8 @@ hi NonText ctermbg=NONE
 
 "highlight ColorColumn ctermbg=233 guibg=#2c2d27
 "set colorcolumn=80
-highlight OverLength ctermbg=52 ctermfg=white
-match OverLength /\%>79v.\+/
+"highlight OverLength ctermbg=52 ctermfg=white
+"match OverLength /\%>79v.\+/
 
 
 " Python
