@@ -42,7 +42,7 @@ background = #111111
 #cursor = #dcdccc
 
 # if unset, will reverse foreground and background
-highlight = #2f2f2f
+#highlight = #2f2f2f
 
 # colors from color0 to color254 can be set
 color0 = #000000
