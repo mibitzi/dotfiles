@@ -26,6 +26,8 @@ Plugin 'evidens/vim-twig'
 Plugin 'wting/rust.vim'
 Plugin 'fatih/vim-go'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 
 call vundle#end()
 
@@ -100,6 +102,9 @@ let g:go_fmt_fail_silently = 0
 
 " Django
 autocmd BufRead,BufNewFile *.html set filetype=htmldjango
+
+" Markdown
+let g:vim_markdown_folding_disabled=1
 
 " Delete unwanted whitespaces on save
 autocmd BufWritePre * :%s/\s\+$//e
