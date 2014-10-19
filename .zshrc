@@ -77,10 +77,6 @@ export PATH=$PATH:~/scripts
 export GOPATH=~/dev/go
 #}}}
 
-#{{{ Rust
-export PATH=$PATH:~/app/rust/bin
-#}}}
-
 #{{{ Ruby
 export PATH=$PATH:~/.gem/ruby/2.1.0/bin
 #}}}
