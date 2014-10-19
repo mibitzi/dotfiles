@@ -46,6 +46,9 @@ source $ZSH/oh-my-zsh.sh
 
 [ -f ~/.dircolors ] && eval $(dircolors ~/.dircolors)
 
+# Disable C-q
+stty -ixon
+
 #{{{ zsh
 setopt no_share_history
 #}}}
@@ -80,6 +83,10 @@ export PATH=$PATH:~/app/rust/bin
 
 #{{{ Ruby
 export PATH=$PATH:~/.gem/ruby/2.1.0/bin
+#}}}
+
+#{{{ xmonad
+export _JAVA_AWT_WM_NONREPARENTING=1
 #}}}
 
 #{{{ Prompt
