@@ -106,6 +106,9 @@ autocmd BufRead,BufNewFile *.html set filetype=htmldjango
 " Markdown
 let g:vim_markdown_folding_disabled=1
 
+" Rust fix
+au BufRead,BufNewFile *.rs set filetype=rust
+
 " Delete unwanted whitespaces on save
 autocmd BufWritePre * :%s/\s\+$//e
 autocmd BufWritePre * :%s/^\s\+$//e
