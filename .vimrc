@@ -28,6 +28,8 @@ Plugin 'fatih/vim-go'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'scrooloose/nerdtree'
 
 call vundle#end()
 
@@ -58,16 +60,20 @@ set listchars=nbsp:¬,tab:»·,trail:·
 set background=dark
 set t_Co=256
 
-"colorscheme molokai
+let g:rehash256 = 1
+colorscheme molokai
+hi MatchParen ctermfg=208  ctermbg=233 cterm=bold
 
-colorscheme mustang
-hi CursorLine cterm=NONE
+"colorscheme mustang
 
 "colorscheme xoria256
-:let g:zenburn_high_Contrast = 1
+hi CursorLine cterm=NONE
+
+"let g:zenburn_high_Contrast = 1
+"hi Normal ctermbg=NONE
+"hi NonText ctermbg=NONE
 "colorscheme zenburn
-hi Normal ctermbg=NONE
-hi NonText ctermbg=NONE
+
 
 "highlight ColorColumn ctermbg=233 guibg=#2c2d27
 "set colorcolumn=80
@@ -130,6 +136,7 @@ let g:ctrlp_custom_ignore = {
   \ }
 
 nnorema <Leader>f :CtrlP<CR>
+nnorema <Leader>b :CtrlPBuffer<CR>
 
 
 "
@@ -174,7 +181,7 @@ set laststatus=2
 set ttimeoutlen=50
 let g:bufferline_echo = 0
 let g:airline_powerline_fonts = 0
-"let g:airline_theme = 'zenburn'
+let g:airline_theme = 'zenburn'
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -210,3 +217,9 @@ nnoremap <Leader>g :GundoToggle<Cr>
 "
 set completeopt=menu,menuone
 let g:EclimCompletionMethod = 'omnifunc'
+
+
+"
+" NERDTree
+"
+map <Leader>t :NERDTreeToggle<CR>

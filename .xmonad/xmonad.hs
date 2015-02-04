@@ -31,7 +31,7 @@ myWorkspaces :: [WorkspaceId]
 myWorkspaces = map show [1 .. 9 :: Int] ++ ["0", "'", "^"]
 
 -- Browser
-myBrowser = "chromium"
+myBrowser = "firefox"
 myJiraSearchEngine = S.searchEngine "Jira" "http://jira.futuretek.ch/browse/"
 myPhpSearchEngine = S.searchEngine "PHP" "http://php.net/"
 

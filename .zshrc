@@ -79,6 +79,15 @@ export GOPATH=~/dev/go
 
 #{{{ Ruby
 export PATH=$PATH:~/.gem/ruby/2.1.0/bin
+export PATH=$PATH:~/.gem/ruby/2.2.0/bin
+#}}}
+
+#{{{ android
+export NDK_ROOT=~/dev/android-ndk-r9b
+#}}}
+
+#{{{ activator
+export PATH=$PATH:~/app/activator
 #}}}
 
 #{{{ xmonad
