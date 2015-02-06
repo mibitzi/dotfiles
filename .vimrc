@@ -105,6 +105,9 @@ let g:pymode_lint_on_fly = 0
 autocmd FileType go set noexpandtab nolist
 "autocmd BufWritePre *.go silent Fmt
 let g:go_fmt_fail_silently = 0
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
 
 " Django
 autocmd BufRead,BufNewFile *.html set filetype=htmldjango
