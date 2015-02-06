@@ -11,7 +11,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'bling/vim-airline'
-"Plugin 'flazz/vim-colorschemes'
+Plugin 'flazz/vim-colorschemes'
 Plugin 'tomasr/molokai'
 Plugin 'kien/ctrlp.vim'
 Plugin 'klen/python-mode'
@@ -61,12 +61,11 @@ set listchars=nbsp:¬,tab:»·,trail:·
 set background=dark
 set t_Co=256
 
-let g:rehash256 = 1
-colorscheme molokai
-hi MatchParen ctermfg=208  ctermbg=233 cterm=bold
+"let g:rehash256 = 1
+"colorscheme molokai
+"hi MatchParen ctermfg=208  ctermbg=233 cterm=bold
 
-"colorscheme mustang
-
+colorscheme mustang
 "colorscheme xoria256
 hi CursorLine cterm=NONE
 
