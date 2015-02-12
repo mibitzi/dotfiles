@@ -226,7 +226,7 @@ let g:EclimCompletionMethod = 'omnifunc'
 " NERDTree
 "
 map <Leader>t :NERDTreeToggle<CR>
-let g:NERDTreeWinSize=18
+let g:NERDTreeWinSize=20
 
 " Auto-close if NERDTree is the only window left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
