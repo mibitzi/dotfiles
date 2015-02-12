@@ -60,14 +60,14 @@ set listchars=nbsp:¬,tab:»·,trail:·
 set background=dark
 set t_Co=256
 
-let g:rehash256 = 1
-colorscheme molokai
-hi MatchParen ctermfg=208  ctermbg=233 cterm=bold
+"let g:rehash256 = 1
+"colorscheme molokai
+"hi MatchParen ctermfg=208  ctermbg=233 cterm=bold
 
-"colorscheme mustang
+colorscheme mustang
+hi CursorLine cterm=NONE
 
 "colorscheme xoria256
-hi CursorLine cterm=NONE
 
 "let g:zenburn_high_Contrast = 1
 "hi Normal ctermbg=NONE
@@ -131,7 +131,7 @@ vnoremap v <ESC>
 " CtrlP
 "
 let g:ctrlp_custom_ignore = {
-  \ 'dir': '\v[\/]((\.(git|hg|svn))|venv[a-z0-9-]*|__pycache__|node_modules|reports\/test)$',
+  \ 'dir': '\v[\/]((\.(git|hg|svn))|venv[a-z0-9-]*|__pycache__|node_modules|target|reports\/test)$',
   \ 'file': '\v\.(exe|so|dll|pyc|o|class|jar)$'
   \ }
 
@@ -223,3 +223,7 @@ let g:EclimCompletionMethod = 'omnifunc'
 " NERDTree
 "
 map <Leader>t :NERDTreeToggle<CR>
+let g:NERDTreeWinSize=18
+
+" Auto-close if NERDTree is the only window left open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
