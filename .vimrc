@@ -30,7 +30,7 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'derekwyatt/vim-scala'
-Plugin 'scrooloose/nerdtree'
+" Plugin 'scrooloose/nerdtree'
 
 call vundle#end()
 
@@ -134,7 +134,7 @@ vnoremap v <ESC>
 " CtrlP
 "
 let g:ctrlp_custom_ignore = {
-  \ 'dir': '\v[\/]((\.(git|hg|svn))|venv[a-z0-9-]*|__pycache__|node_modules|target|reports\/test)$',
+  \ 'dir': '\v[\/]((\.(git|hg|svn))|venv[a-z0-9-]*|__pycache__|node_modules|reports\/test|app\/cache|vendor)$',
   \ 'file': '\v\.(exe|so|dll|pyc|o|class|jar)$'
   \ }
 
@@ -225,8 +225,8 @@ let g:EclimCompletionMethod = 'omnifunc'
 "
 " NERDTree
 "
-map <Leader>t :NERDTreeToggle<CR>
-let g:NERDTreeWinSize=20
+"map <Leader>t :NERDTreeToggle<CR>
+"let g:NERDTreeWinSize=20
 
-" Auto-close if NERDTree is the only window left open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+"" Auto-close if NERDTree is the only window left open
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
