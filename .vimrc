@@ -135,6 +135,13 @@ nnoremap <Leader>w :w<CR>
 nnoremap <Leader>e :Explore<CR>
 vnoremap v <ESC>
 
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
+
 "
 " CtrlP
 "
