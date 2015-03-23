@@ -13,6 +13,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'bling/vim-airline'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'tomasr/molokai'
+"Plugin 'fatih/molokai'
 Plugin 'kien/ctrlp.vim'
 Plugin 'klen/python-mode'
 Plugin 'mattn/emmet-vim'
@@ -62,6 +63,7 @@ set background=dark
 set t_Co=256
 
 "let g:rehash256 = 1
+"let g:molokai_original = 1
 "colorscheme molokai
 "hi MatchParen ctermfg=208  ctermbg=233 cterm=bold
 
@@ -178,7 +180,7 @@ set number
 "  endif
 "endfunc
 
-nnoremap <C-l> :call NumberToggle()<cr>
+"nnoremap <C-l> :call NumberToggle()<cr>
 
 "
 " Airline
@@ -186,22 +188,8 @@ nnoremap <C-l> :call NumberToggle()<cr>
 set laststatus=2
 set ttimeoutlen=50
 let g:bufferline_echo = 0
-let g:airline_powerline_fonts = 0
-let g:airline_theme = 'zenburn'
-
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-
-" unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = 'ln:'
-let g:airline_symbols.branch = 'br:'
-let g:airline_symbols.paste = 'paste'
-let g:airline_symbols.whitespace = 'Ξ'
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'badwolf'
 
 
 "
@@ -233,3 +221,16 @@ let g:EclimCompletionMethod = 'omnifunc'
 
 "" Auto-close if NERDTree is the only window left open
 "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+"
+" GVIM
+"
+if has('gui_running')
+    set guifont=Source\ Code\ Pro\ 11
+    set guioptions-=T
+    set guioptions-=m
+    set guioptions-=r
+    set guioptions-=R
+    set guioptions-=l
+    set guioptions-=L
+endif
