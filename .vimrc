@@ -32,6 +32,8 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'derekwyatt/vim-scala'
 " Plugin 'scrooloose/nerdtree'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'facebook/vim-flow'
 
 call vundle#end()
 
@@ -50,6 +52,7 @@ set showmatch
 set title
 set cursorline
 set incsearch
+set number
 
 " Show whitespaces
 set list
@@ -175,21 +178,6 @@ let g:EasyMotion_smartcase = 1
 
 
 "
-" Line numbers
-"
-set number
-"set relativenumber
-"function! NumberToggle()
-"  if(&relativenumber == 1)
-"    set norelativenumber
-"  else
-"    set relativenumber
-"  endif
-"endfunc
-
-"nnoremap <C-l> :call NumberToggle()<cr>
-
-"
 " Airline
 "
 set laststatus=2
@@ -235,6 +223,11 @@ endif
 "
 set completeopt=menu,menuone
 let g:EclimCompletionMethod = 'omnifunc'
+
+"
+" Flow
+"
+let g:flow#autoclose = 1
 
 
 "
