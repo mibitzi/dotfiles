@@ -32,6 +32,9 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'derekwyatt/vim-scala'
 " Plugin 'scrooloose/nerdtree'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'facebook/vim-flow'
+Plugin 'cakebaker/scss-syntax.vim'
 
 call vundle#end()
 
@@ -106,6 +109,7 @@ let g:pymode_lint_on_fly = 0
 
 " Go
 autocmd FileType go set noexpandtab nolist
+let g:go_fmt_autosave = 1
 let g:go_fmt_fail_silently = 0
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -189,6 +193,13 @@ set number
 
 "nnoremap <C-l> :call NumberToggle()<cr>
 
+
+"
+" Syntastic
+"
+let g:syntastic_go_checkers = ['go']
+
+
 "
 " Airline
 "
@@ -235,6 +246,12 @@ endif
 "
 set completeopt=menu,menuone
 let g:EclimCompletionMethod = 'omnifunc'
+
+
+"
+" Flow
+"
+let g:flow#autoclose = 1
 
 
 "
