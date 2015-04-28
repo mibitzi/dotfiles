@@ -53,6 +53,7 @@ set showmatch
 set title
 set cursorline
 set incsearch
+set number
 
 " Show whitespaces
 set list
@@ -246,6 +247,11 @@ endif
 "
 set completeopt=menu,menuone
 let g:EclimCompletionMethod = 'omnifunc'
+
+"
+" Flow
+"
+let g:flow#autoclose = 1
 
 
 "
