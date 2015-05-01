@@ -24,4 +24,4 @@ xsetroot -cursor_name left_ptr
 /usr/bin/start-pulseaudio-x11 &
 
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
-exec i3
+exec qtile

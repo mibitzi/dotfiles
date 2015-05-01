@@ -119,6 +119,7 @@ bindsym $mod+Shift+r restart
 bar {
         status_command SCRIPT_DIR=/usr/libexec/i3blocks i3blocks -c ~/.i3/i3blocks.conf
         position top
+        workspace_buttons yes
 }
 
 set $updateVol pkill -RTMIN+1 i3blocks
