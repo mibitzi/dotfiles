@@ -21,5 +21,7 @@ xsetroot -cursor_name left_ptr
 
 #trayer --edge top --align right --SetPartialStrut true --expand true --widthtype percent --width 4 --transparent true --tint 0x000000 --alpha 0 --height 14 --monitor 0 &
 
+/usr/bin/start-pulseaudio-x11 &
+
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 exec i3
