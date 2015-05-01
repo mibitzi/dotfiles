@@ -30,7 +30,7 @@ def get_workspace(num):
 
 
 def switch_workspace(num):
-    ipc(msg='workspace {}'.format(num))
+    ipc(msg='workspace number {}'.format(num))
 
 
 def swap_visible_workspaces(a, b):
