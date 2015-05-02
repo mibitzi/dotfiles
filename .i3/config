@@ -149,3 +149,4 @@ for_window [class="Skype"] floating enable
 for_window [class="Vlc"] floating enable
 for_window [class="Pidgin"] floating enable
 for_window [title="Firefox OS Simulator"] floating enable
+for_window [title="Volume Control"] floating enable
