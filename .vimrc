@@ -35,6 +35,7 @@ Plugin 'derekwyatt/vim-scala'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'facebook/vim-flow'
 Plugin 'othree/html5.vim'
+Plugin 'cakebaker/scss-syntax.vim'
 
 call vundle#end()
 
@@ -110,6 +111,7 @@ let g:pymode_lint_on_fly = 0
 
 " Go
 autocmd FileType go set noexpandtab nolist
+let g:go_fmt_autosave = 1
 let g:go_fmt_fail_silently = 0
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -179,6 +181,28 @@ let g:EasyMotion_smartcase = 1
 
 
 "
+" Line numbers
+"
+set number
+"set relativenumber
+"function! NumberToggle()
+"  if(&relativenumber == 1)
+"    set norelativenumber
+"  else
+"    set relativenumber
+"  endif
+"endfunc
+
+"nnoremap <C-l> :call NumberToggle()<cr>
+
+
+"
+" Syntastic
+"
+let g:syntastic_go_checkers = ['go']
+
+
+"
 " Airline
 "
 set laststatus=2
@@ -224,6 +248,12 @@ endif
 "
 set completeopt=menu,menuone
 let g:EclimCompletionMethod = 'omnifunc'
+
+"
+" Flow
+"
+let g:flow#autoclose = 1
+
 
 "
 " Flow

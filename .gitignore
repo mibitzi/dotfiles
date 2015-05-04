@@ -2,3 +2,5 @@
 /.emacs.d/el-get
 /.emacs.d/auto-save-list
 /.emacs.d/projectile-bookmarks.eld
+*.pyc
+__pycache__

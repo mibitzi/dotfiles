@@ -83,6 +83,10 @@ export PATH=$PATH:~/.gem/ruby/2.1.0/bin
 export PATH=$PATH:~/.gem/ruby/2.2.0/bin
 #}}}
 
+#{{{ flow
+export PATH=$PATH:~/app/flow
+#}}}
+
 #{{{ android
 export NDK_ROOT=~/dev/android-ndk-r9b
 #}}}
