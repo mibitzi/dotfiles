@@ -34,6 +34,7 @@ Plugin 'derekwyatt/vim-scala'
 " Plugin 'scrooloose/nerdtree'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'facebook/vim-flow'
+Plugin 'othree/html5.vim'
 
 call vundle#end()
 
