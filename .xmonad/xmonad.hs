@@ -11,6 +11,7 @@ import XMonad.Layout.NoBorders
 import XMonad.Actions.SpawnOn
 import XMonad.Actions.CycleWS
 import XMonad.StackSet
+import Graphics.X11.ExtraTypes.XF86
 
 import System.Exit
 
@@ -69,6 +70,17 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- Rename workspace
     , ((modMask,               xK_n     ), renameWorkspace defaultXPConfig)
+
+    -- Media keys
+    , ((0, xF86XK_AudioLowerVolume      ), spawn "pulseaudio-ctl down 2")
+    , ((0, xF86XK_AudioRaiseVolume      ), spawn "pulseaudio-ctl up 2")
+    , ((0, xF86XK_AudioMute             ), spawn "pulseaudio-ctl mute")
+
+    -- xF86XK_AudioMicMute
+    , ((0, 0x1008FFB2                   ), spawn "pulseaudio-ctl mute-input")
+
+    , ((0, xF86XK_MonBrightnessDown     ), spawn "xblacklight -dec 10")
+    , ((0, xF86XK_MonBrightnessUp       ), spawn "xblacklight -inc 10")
 
     -- Search commands
     , ((modMask, xK_s), SM.submap $ mySearchEngineMap $ S.promptSearchBrowser defaultXPConfig myBrowser)
