@@ -8,6 +8,14 @@ import XMonad.Util.Run
 import XMonad.Actions.WorkspaceNames
 import XMonad.Prompt
 import XMonad.Layout.NoBorders
+import XMonad.Layout.SubLayouts
+import XMonad.Layout.WindowNavigation
+import XMonad.Layout.BoringWindows
+import XMonad.Layout.Simplest
+import XMonad.Layout.Circle
+import XMonad.Layout.Tabbed
+import XMonad.Util.Themes
+import XMonad.Actions.SpawnOn
 
 import System.Exit
 
@@ -44,7 +52,7 @@ mySearchEngineMap method = M.fromList $
 -- Keybindings
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- Launch terminal
-    [ ((modMask,               xK_Return), spawn $ XMonad.terminal conf)
+    [ ((modMask,               xK_Return), spawnHere $ XMonad.terminal conf)
 
     -- Close the focused window
     , ((modMask,               xK_q     ), kill)
@@ -52,6 +60,20 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- Swap the focused window and the master window
     , ((modMask .|. shiftMask, xK_Return), windows W.swapMaster)
+
+    -- SubLayouts
+    , ((modMask .|. controlMask, xK_h), sendMessage $ pullGroup L)
+    , ((modMask .|. controlMask, xK_l), sendMessage $ pullGroup R)
+    , ((modMask .|. controlMask, xK_k), sendMessage $ pullGroup U)
+    , ((modMask .|. controlMask, xK_j), sendMessage $ pullGroup D)
+
+    , ((modMask .|. controlMask, xK_m), withFocused (sendMessage . MergeAll))
+    , ((modMask .|. controlMask, xK_u), withFocused (sendMessage . UnMerge))
+
+    , ((modMask .|. controlMask, xK_period), onGroup W.focusUp')
+    , ((modMask .|. controlMask, xK_comma), onGroup W.focusDown')
+
+    , ((modMask, xK_s), SM.submap $ defaultSublMap conf)
 
     -- Quit xmonad
     --, ((modMask .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
@@ -63,8 +85,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_n     ), renameWorkspace defaultXPConfig)
 
     -- Search commands
-    , ((modMask, xK_s), SM.submap $ mySearchEngineMap $ S.promptSearchBrowser defaultXPConfig myBrowser)
-    , ((modMask .|. shiftMask, xK_s), SM.submap $ mySearchEngineMap $ S.selectSearchBrowser myBrowser)
+    --, ((modMask, xK_s), SM.submap $ mySearchEngineMap $ S.promptSearchBrowser defaultXPConfig myBrowser)
+    --, ((modMask .|. shiftMask, xK_s), SM.submap $ mySearchEngineMap $ S.selectSearchBrowser myBrowser)
     ]
     ++
     -- Workspaces
@@ -82,6 +104,11 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
                                                  , xK_apostrophe
                                                  , xK_asciicircum]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
+
+-- Layout hook
+--myLayout = smartBorders . avoidStruts $ layoutHook defaultConfig
+myLayout = smartBorders . avoidStruts $ windowNavigation $ boringWindows $ subLayout [] row $ row ||| noBorders Full
+  where row = Tall 1 (3/100) (1/2)
 
 -- Manage hook
 myManageHook = composeAll
@@ -118,7 +145,7 @@ main = do
                            , focusedBorderColor = myFocusedBorderColor
                            , workspaces = myWorkspaces
                            , manageHook=myManageHook <+> manageHook defaultConfig
-                           , layoutHook=smartBorders . avoidStruts $ layoutHook defaultConfig
+                           , layoutHook=myLayout
                            , logHook = myLogHook xmobarPipe
                            , keys = \c -> myKeys c `M.union` keys defaultConfig c
                            }
