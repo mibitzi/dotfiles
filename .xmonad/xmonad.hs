@@ -8,14 +8,9 @@ import XMonad.Util.Run
 import XMonad.Actions.WorkspaceNames
 import XMonad.Prompt
 import XMonad.Layout.NoBorders
-import XMonad.Layout.SubLayouts
-import XMonad.Layout.WindowNavigation
-import XMonad.Layout.BoringWindows
-import XMonad.Layout.Simplest
-import XMonad.Layout.Circle
-import XMonad.Layout.Tabbed
-import XMonad.Util.Themes
 import XMonad.Actions.SpawnOn
+import XMonad.Actions.CycleWS
+import XMonad.StackSet
 
 import System.Exit
 
@@ -38,6 +33,15 @@ myFocusedBorderColor = "#0088CC"
 -- Workspaces
 myWorkspaces :: [WorkspaceId]
 myWorkspaces = map show [1 .. 9 :: Int] ++ ["0", "'", "^"]
+
+wsPrefix :: String -> String
+wsPrefix s = snd $ splitAt 2 $ fst $ break (== '-') s
+
+wsSamePrefix :: X (WindowSpace -> Bool)
+wsSamePrefix = do
+  wname <- getWorkspaceNames
+  current <- gets (W.currentTag . windowset)
+  return $ ((wsPrefix $ wname $ current) ==) . wsPrefix . wname . tag
 
 -- Browser
 myBrowser = "google-chrome-stable"
@@ -62,32 +66,21 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- Swap the focused window and the master window
     , ((modMask .|. shiftMask, xK_Return), windows W.swapMaster)
 
-    -- SubLayouts
-    , ((modMask .|. controlMask, xK_h), sendMessage $ pullGroup L)
-    , ((modMask .|. controlMask, xK_l), sendMessage $ pullGroup R)
-    , ((modMask .|. controlMask, xK_k), sendMessage $ pullGroup U)
-    , ((modMask .|. controlMask, xK_j), sendMessage $ pullGroup D)
-
-    , ((modMask .|. controlMask, xK_m), withFocused (sendMessage . MergeAll))
-    , ((modMask .|. controlMask, xK_u), withFocused (sendMessage . UnMerge))
-
-    , ((modMask .|. controlMask, xK_period), onGroup W.focusUp')
-    , ((modMask .|. controlMask, xK_comma), onGroup W.focusDown')
-
-    , ((modMask, xK_s), SM.submap $ defaultSublMap conf)
-
     -- Quit xmonad
     --, ((modMask .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
 
     -- Restart xmonad
     , ((modMask .|. shiftMask, xK_q     ), spawn "xmonad --recompile && xmonad --restart")
 
+    -- Prev/Next workspace with same prefix
+    , ((modMask,               xK_o     ), moveTo Next (WSIs wsSamePrefix))
+
     -- Rename workspace
     , ((modMask,               xK_n     ), renameWorkspace defaultXPConfig)
 
     -- Search commands
-    --, ((modMask, xK_s), SM.submap $ mySearchEngineMap $ S.promptSearchBrowser defaultXPConfig myBrowser)
-    --, ((modMask .|. shiftMask, xK_s), SM.submap $ mySearchEngineMap $ S.selectSearchBrowser myBrowser)
+    , ((modMask, xK_s), SM.submap $ mySearchEngineMap $ S.promptSearchBrowser defaultXPConfig myBrowser)
+    , ((modMask .|. shiftMask, xK_s), SM.submap $ mySearchEngineMap $ S.selectSearchBrowser myBrowser)
     ]
     ++
     -- Workspaces
@@ -107,8 +100,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
 
 -- Layout hook
-myLayout = avoidStruts $ windowNavigation $ boringWindows $ subLayout [] row $ row ||| Full
-  where row = Tall 1 (3/100) (1/2)
+myLayout = avoidStruts $ smartBorders $ Tall 1 (3/100) (1/2) ||| noBorders Full
 
 -- Manage hook
 myManageHook = composeAll
@@ -144,7 +136,7 @@ main = do
                            , borderWidth = myBorderWidth
                            , normalBorderColor = myNormalBorderColor
                            , focusedBorderColor = myFocusedBorderColor
-                           , workspaces = myWorkspaces
+                           , XMonad.workspaces = myWorkspaces
                            , manageHook=myManageHook <+> manageHook defaultConfig
                            , layoutHook=myLayout
                            , logHook = myLogHook xmobarPipe
