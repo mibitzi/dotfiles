@@ -32,6 +32,7 @@ myTerminal = "termite"
 
 -- Borders
 myBorderWidth = 1
+myNormalBorderColor = "#000000"
 myFocusedBorderColor = "#0088CC"
 
 -- Workspaces
@@ -106,8 +107,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
 
 -- Layout hook
---myLayout = smartBorders . avoidStruts $ layoutHook defaultConfig
-myLayout = smartBorders . avoidStruts $ windowNavigation $ boringWindows $ subLayout [] row $ row ||| noBorders Full
+myLayout = avoidStruts $ windowNavigation $ boringWindows $ subLayout [] row $ row ||| Full
   where row = Tall 1 (3/100) (1/2)
 
 -- Manage hook
@@ -142,6 +142,7 @@ main = do
     xmonad $ defaultConfig { terminal = myTerminal
                            , modMask = myModMask
                            , borderWidth = myBorderWidth
+                           , normalBorderColor = myNormalBorderColor
                            , focusedBorderColor = myFocusedBorderColor
                            , workspaces = myWorkspaces
                            , manageHook=myManageHook <+> manageHook defaultConfig
