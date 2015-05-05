@@ -115,7 +115,7 @@ myManageHook = composeAll
     , className =? "Lxappereance" --> doFloat
     , className =? "Skype" --> doFloat
     , className =? "Vlc" --> doFloat
-    , title =? "Cocos2dx-Linux" --> doFloat
+    , title =? "Volume Control" --> doFloat
     , manageDocks
     , placeHook $ smart (0.5, 0.5)
     -- , insertPosition End Newer

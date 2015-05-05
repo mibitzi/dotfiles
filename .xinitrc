@@ -11,7 +11,7 @@ xrandr --output HDMI1 --primary --output DP2 --right-of HDMI1 --output eDP1 --ri
 xset -b
 xset s 0 0
 xset -dpms
-#ibus-daemon -drx
+ibus-daemon -drx
 
 setxkbmap -option caps:swapescape -layout 'ch' -variant 'de_nodeadkeys'
 
