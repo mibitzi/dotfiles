@@ -34,15 +34,6 @@ myFocusedBorderColor = "#0088CC"
 myWorkspaces :: [WorkspaceId]
 myWorkspaces = map show [1 .. 9 :: Int] ++ ["0", "'", "^"]
 
-wsPrefix :: String -> String
-wsPrefix s = snd $ splitAt 2 $ fst $ break (== '-') s
-
-wsSamePrefix :: X (WindowSpace -> Bool)
-wsSamePrefix = do
-  wname <- getWorkspaceNames
-  current <- gets (W.currentTag . windowset)
-  return $ ((wsPrefix $ wname $ current) ==) . wsPrefix . wname . tag
-
 -- Browser
 myBrowser = "google-chrome-stable"
 myJiraSearchEngine = S.searchEngine "Jira" "http://jira.futuretek.ch/browse/"
@@ -72,8 +63,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- Restart xmonad
     , ((modMask .|. shiftMask, xK_q     ), spawn "xmonad --recompile && xmonad --restart")
 
-    -- Prev/Next workspace with same prefix
-    , ((modMask,               xK_o     ), moveTo Next (WSIs wsSamePrefix))
+    -- Prev/Next workspace
+    , ((modMask,               xK_i     ), moveTo Prev AnyWS)
+    , ((modMask,               xK_o     ), moveTo Next AnyWS)
 
     -- Rename workspace
     , ((modMask,               xK_n     ), renameWorkspace defaultXPConfig)
