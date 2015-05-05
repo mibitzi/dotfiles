@@ -64,8 +64,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. shiftMask, xK_q     ), spawn "xmonad --recompile && xmonad --restart")
 
     -- Prev/Next workspace
-    , ((modMask,               xK_i     ), moveTo Prev AnyWS)
-    , ((modMask,               xK_o     ), moveTo Next AnyWS)
+    , ((modMask,               xK_i     ), moveTo Prev NonEmptyWS)
+    , ((modMask,               xK_o     ), moveTo Next NonEmptyWS)
 
     -- Rename workspace
     , ((modMask,               xK_n     ), renameWorkspace defaultXPConfig)
