@@ -12,6 +12,7 @@ import XMonad.Actions.SpawnOn
 import XMonad.Actions.CycleWS
 import XMonad.StackSet
 import Graphics.X11.ExtraTypes.XF86
+import XMonad.Hooks.EwmhDesktops
 
 import System.Exit
 
@@ -82,6 +83,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xF86XK_MonBrightnessDown     ), spawn "xblacklight -dec 10")
     , ((0, xF86XK_MonBrightnessUp       ), spawn "xblacklight -inc 10")
 
+    , ((modMask, xK_b                   ), sendMessage ToggleStruts)
+
     -- Search commands
     , ((modMask, xK_s), SM.submap $ mySearchEngineMap $ S.promptSearchBrowser defaultXPConfig myBrowser)
     , ((modMask .|. shiftMask, xK_s), SM.submap $ mySearchEngineMap $ S.selectSearchBrowser myBrowser)
@@ -104,11 +107,13 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
 
 -- Layout hook
-myLayout = avoidStruts $ smartBorders $ Tall 1 (3/100) (1/2) ||| noBorders Full
+myLayout = smartBorders . avoidStruts $ tall ||| Mirror tall ||| noBorders Full
+    where tall = Tall 1 (3/100) (1/2)
 
 -- Manage hook
 myManageHook = composeAll
-    [ isFullscreen --> doFullFloat
+    [ manageDocks
+    , isFullscreen --> doFullFloat
     , isDialog --> doCenterFloat
     , role =? "Preferences" --> doFloat
     , className =? "Pidgin" --> doFloat
@@ -116,7 +121,6 @@ myManageHook = composeAll
     , className =? "Skype" --> doFloat
     , className =? "Vlc" --> doFloat
     , title =? "Volume Control" --> doFloat
-    , manageDocks
     , placeHook $ smart (0.5, 0.5)
     -- , insertPosition End Newer
     ]
@@ -135,7 +139,7 @@ myLogHook handle = workspaceNamesPP defaultPP
 main :: IO()
 main = do
     xmobarPipe <- spawnPipe "xmobar"
-    xmonad $ defaultConfig { terminal = myTerminal
+    xmonad $ ewmh defaultConfig { terminal = myTerminal
                            , modMask = myModMask
                            , borderWidth = myBorderWidth
                            , normalBorderColor = myNormalBorderColor
