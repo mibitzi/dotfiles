@@ -36,6 +36,7 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'facebook/vim-flow'
 Plugin 'othree/html5.vim'
 Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'zah/nimrod.vim'
 
 call vundle#end()
 
