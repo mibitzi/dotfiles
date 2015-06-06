@@ -25,3 +25,4 @@ trayer --edge top --align right --SetPartialStrut true --expand true --widthtype
 
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 exec xmonad
+#exec i3
