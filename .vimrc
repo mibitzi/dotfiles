@@ -149,6 +149,10 @@ nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
 
+imap jk <Esc>
+
+command -nargs=* Grep execute 'silent Ggrep <args>' | cw
+
 "
 " CtrlP
 "
