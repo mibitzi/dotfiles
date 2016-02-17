@@ -17,9 +17,9 @@ Config { font = "-misc-fixed-*-*-*-*-10-*-*-*-*-*-*-*"
         --   , "--", "-O", "<fc=green>AC</fc>", "-o", "<fc=orange>BAT</fc>"
         --   , "-L", "-15", "-H", "-5"
         --   , "-l", "red", "-m", "cyan", "-h", "green"] 100
-        , Run Com "sh" ["-c", "pulseaudio-ctl full-status | awk '{printf(\"Vol %d%%\\n\", $1)}'"] "volume" 10
+        -- , Run Com "sh" ["-c", "pulseaudio-ctl full-status | awk '{printf(\"Vol %d%%\\n\", $1)}'"] "volume" 10
         ]
         , sepChar = "%"
         , alignSep = "}{"
-        , template = "%StdinReader% }{ %uname% | Load: %loadavg% | %memory% | %swap% | %disku% | %volume% | %LSZH% | <fc=#ffaf00>%date%</fc>   "
+        , template = "%StdinReader% }{ %uname% | Load: %loadavg% | %memory% | %swap% | %disku% | %LSZH% | <fc=#ffaf00>%date%</fc>   "
 }

@@ -1,4 +1,5 @@
 import XMonad
+import Data.Default
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.InsertPosition
@@ -8,6 +9,7 @@ import XMonad.Util.Run
 import XMonad.Actions.WorkspaceNames
 import XMonad.Prompt
 import XMonad.Layout.NoBorders
+import XMonad.Layout.Spacing
 import XMonad.Actions.SpawnOn
 import XMonad.Actions.CycleWS
 import XMonad.StackSet
@@ -29,7 +31,7 @@ myTerminal = "termite"
 
 -- Borders
 myBorderWidth = 1
-myNormalBorderColor = "#000000"
+myNormalBorderColor = "#333333"
 myFocusedBorderColor = "#0088CC"
 
 -- Workspaces
@@ -38,14 +40,6 @@ myWorkspaces = map show [1 .. 9 :: Int] ++ ["0", "'", "^"]
 
 -- Browser
 myBrowser = "google-chrome-stable"
-myJiraSearchEngine = S.searchEngine "Jira" "http://jira.futuretek.ch/browse/"
-myPhpSearchEngine = S.searchEngine "PHP" "http://php.net/"
-
-mySearchEngineMap method = M.fromList $
-    [ ((0, xK_g), method S.google)
-    , ((0, xK_j), method myJiraSearchEngine)
-    , ((0, xK_p), method myPhpSearchEngine)
-    ]
 
 -- Keybindings
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
@@ -65,12 +59,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- Restart xmonad
     , ((modMask .|. shiftMask, xK_q     ), spawn "xmonad --recompile && xmonad --restart")
 
-    -- Prev/Next workspace
-    , ((modMask,               xK_i     ), moveTo Prev NonEmptyWS)
-    , ((modMask,               xK_o     ), moveTo Next NonEmptyWS)
-
     -- Rename workspace
-    , ((modMask,               xK_n     ), renameWorkspace defaultXPConfig)
+    , ((modMask,               xK_n     ), renameWorkspace def)
 
     -- Media keys
     , ((0, xF86XK_AudioLowerVolume      ), spawn "pulseaudio-ctl down 2")
@@ -85,9 +75,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     , ((modMask, xK_b                   ), sendMessage ToggleStruts)
 
-    -- Search commands
-    , ((modMask, xK_s), SM.submap $ mySearchEngineMap $ S.promptSearchBrowser defaultXPConfig myBrowser)
-    , ((modMask .|. shiftMask, xK_s), SM.submap $ mySearchEngineMap $ S.selectSearchBrowser myBrowser)
+    -- Search
+    , ((modMask, xK_s), S.promptSearchBrowser def myBrowser S.google)
     ]
     ++
     -- Workspaces
@@ -107,7 +96,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
 
 -- Layout hook
-myLayout = smartBorders . avoidStruts $ tall ||| Mirror tall ||| noBorders Full
+myLayout = smartBorders . avoidStruts . smartSpacing 3 $ tall ||| Mirror tall ||| Full
     where tall = Tall 1 (3/100) (1/2)
 
 -- Manage hook
@@ -127,7 +116,7 @@ myManageHook = composeAll
     where role = stringProperty "WM_WINDOW_ROLE"
 
 -- Log hook
-myLogHook handle = workspaceNamesPP defaultPP
+myLogHook handle = workspaceNamesPP def
     { ppOutput = hPutStrLn handle
     , ppCurrent = \wsID -> "<fc=#FFAF00>[" ++ wsID ++ "]</fc>"
     , ppUrgent = \wsID -> "<fc=#FF0000>" ++ wsID ++ "</fc>"
@@ -139,14 +128,14 @@ myLogHook handle = workspaceNamesPP defaultPP
 main :: IO()
 main = do
     xmobarPipe <- spawnPipe "xmobar"
-    xmonad $ ewmh defaultConfig { terminal = myTerminal
+    xmonad $ ewmh def { terminal = myTerminal
                            , modMask = myModMask
                            , borderWidth = myBorderWidth
                            , normalBorderColor = myNormalBorderColor
                            , focusedBorderColor = myFocusedBorderColor
                            , XMonad.workspaces = myWorkspaces
-                           , manageHook=myManageHook <+> manageHook defaultConfig
+                           , manageHook=myManageHook <+> manageHook def
                            , layoutHook=myLayout
                            , logHook = myLogHook xmobarPipe
-                           , keys = \c -> myKeys c `M.union` keys defaultConfig c
+                           , keys = \c -> myKeys c `M.union` keys def c
                            }
