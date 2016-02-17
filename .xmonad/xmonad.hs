@@ -76,7 +76,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask              , xK_period), sendMessage (IncMasterN (-1)))
 
     -- quit/restart xmonad
-    --, ((modMask .|. ctrlMask, xK_q   ), io (exitWith ExitSuccess))
+    --, ((modMask .|. controlMask, xK_q   ), io (exitWith ExitSuccess))
     , ((modMask .|. shiftMask, xK_q     ), spawn "xmonad --recompile && xmonad --restart")
 
     -- Rename workspace
