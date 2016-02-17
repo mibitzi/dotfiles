@@ -15,6 +15,8 @@ import XMonad.Actions.CycleWS
 import XMonad.StackSet
 import Graphics.X11.ExtraTypes.XF86
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Prompt
+import XMonad.Prompt.Shell
 
 import System.Exit
 
@@ -48,19 +50,40 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- Close the focused window
     , ((modMask,               xK_q     ), kill)
-    , ((modMask .|. shiftMask, xK_c     ), return ())
 
-    -- Swap the focused window and the master window
+    -- Rotate through the available layouts
+    , ((modMask,               xK_space ), sendMessage NextLayout)
+
+    -- Move focus
+    , ((modMask,               xK_j     ), windows W.focusDown)
+    , ((modMask,               xK_k     ), windows W.focusUp)
+    , ((modMask,               xK_m     ), windows W.focusMaster)
+
+    -- modifying the window order
     , ((modMask .|. shiftMask, xK_Return), windows W.swapMaster)
+    , ((modMask .|. shiftMask, xK_j     ), windows W.swapDown)
+    , ((modMask .|. shiftMask, xK_k     ), windows W.swapUp)
 
-    -- Quit xmonad
-    --, ((modMask .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
+    -- resizing the master/slave ratio
+    , ((modMask,               xK_h     ), sendMessage Shrink)
+    , ((modMask,               xK_l     ), sendMessage Expand)
 
-    -- Restart xmonad
+    -- floating layer support
+    , ((modMask,               xK_t     ), withFocused $ windows . W.sink)
+
+    -- increase or decrease number of windows in the master area
+    , ((modMask              , xK_comma ), sendMessage (IncMasterN 1))
+    , ((modMask              , xK_period), sendMessage (IncMasterN (-1)))
+
+    -- quit/restart xmonad
+    --, ((modMask .|. ctrlMask, xK_q   ), io (exitWith ExitSuccess))
     , ((modMask .|. shiftMask, xK_q     ), spawn "xmonad --recompile && xmonad --restart")
 
     -- Rename workspace
     , ((modMask,               xK_n     ), renameWorkspace def)
+
+    -- Shell prompt
+    , ((modMask,               xK_p     ), shellPrompt def)
 
     -- Media keys
     , ((0, xF86XK_AudioLowerVolume      ), spawn "pulseaudio-ctl down 2")
@@ -73,6 +96,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((0, xF86XK_MonBrightnessDown     ), spawn "xblacklight -dec 10")
     , ((0, xF86XK_MonBrightnessUp       ), spawn "xblacklight -inc 10")
 
+    -- toggle xmobar
     , ((modMask, xK_b                   ), sendMessage ToggleStruts)
 
     -- Search
@@ -94,6 +118,12 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
                                                  , xK_apostrophe
                                                  , xK_asciicircum]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
+    ++
+    -- mod-{w,e,r} %! Switch to physical/Xinerama screens 1, 2, or 3
+    -- mod-shift-{w,e,r} %! Move client to screen 1, 2, or 3
+    [((m .|. modMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
+        | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
+        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 -- Layout hook
 myLayout = smartBorders . avoidStruts . smartSpacing 3 $ tall ||| Mirror tall ||| Full
@@ -137,5 +167,5 @@ main = do
                            , manageHook=myManageHook <+> manageHook def
                            , layoutHook=myLayout
                            , logHook = myLogHook xmobarPipe
-                           , keys = \c -> myKeys c `M.union` keys def c
+                           , keys = \c -> myKeys c
                            }
