@@ -85,8 +85,7 @@ export PATH=$PATH:$GOPATH/bin
 #}}}
 
 #{{{ Ruby
-export PATH=$PATH:~/.gem/ruby/2.1.0/bin
-export PATH=$PATH:~/.gem/ruby/2.2.0/bin
+export PATH=$PATH:$(ruby -rubygems -e "puts Gem.user_dir")/bin
 #}}}
 
 #{{{ android
