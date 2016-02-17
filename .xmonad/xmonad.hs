@@ -130,18 +130,18 @@ myLayout = smartBorders . avoidStruts . smartSpacing 3 $ tall ||| Mirror tall ||
     where tall = Tall 1 (3/100) (1/2)
 
 -- Manage hook
-myManageHook = composeAll
-    [ manageDocks
-    , isFullscreen --> doFullFloat
-    , isDialog --> doCenterFloat
-    , role =? "Preferences" --> doFloat
-    , className =? "Pidgin" --> doFloat
-    , className =? "Lxappereance" --> doFloat
-    , className =? "Skype" --> doFloat
-    , className =? "Vlc" --> doFloat
-    , title =? "Volume Control" --> doFloat
-    , placeHook $ smart (0.5, 0.5)
-    -- , insertPosition End Newer
+myManageHook = manageDocks <+> composeOne
+    [ isFullscreen -?> doFullFloat
+    , isDialog -?> doCenterFloat
+    , role =? "Preferences" -?> doFloat
+    , className =? "Pidgin" -?> doFloat
+    , className =? "Lxappereance" -?> doFloat
+    , className =? "Skype" -?> doFloat
+    , className =? "Vlc" -?> doFloat
+    , title =? "Volume Control" -?> doFloat
+    --, placeHook $ smart (0.5, 0.5)
+    , transience
+    , pure True -?> insertPosition Below Newer
     ]
     where role = stringProperty "WM_WINDOW_ROLE"
 
