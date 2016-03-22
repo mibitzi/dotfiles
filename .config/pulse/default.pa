@@ -1,0 +1,8 @@
+.include /etc/pulse/default.pa
+
+### Load echo cancellation module
+#load-module module-echo-cancel aec_method=webrtc
+#load-module module-echo-cancel
+
+#load-module module-echo-cancel source_name=echosource aec_method=webrtc
+#set-default-source echosource
