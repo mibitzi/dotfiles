@@ -69,7 +69,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_l     ), sendMessage Expand)
 
     -- floating layer support
-    , ((modMask,               xK_t     ), withFocused $ windows . W.sink)
+    , ((modMask .|. shiftMask, xK_space ), withFocused $ windows . W.sink)
 
     -- increase or decrease number of windows in the master area
     , ((modMask              , xK_comma ), sendMessage (IncMasterN 1))
@@ -122,11 +122,11 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- mod-{w,e,r} %! Switch to physical/Xinerama screens 1, 2, or 3
     -- mod-shift-{w,e,r} %! Move client to screen 1, 2, or 3
     [((m .|. modMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
+        | (key, sc) <- zip [xK_e, xK_r, xK_w, xK_t] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 -- Layout hook
-myLayout = smartBorders . avoidStruts . smartSpacing 3 $ tall ||| Mirror tall ||| Full
+myLayout = smartBorders . avoidStruts . smartSpacing 3 $ tall ||| Full
     where tall = Tall 1 (3/100) (1/2)
 
 -- Manage hook
