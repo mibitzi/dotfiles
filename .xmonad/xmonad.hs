@@ -141,7 +141,7 @@ myManageHook = manageDocks <+> composeOne
     , title =? "Volume Control" -?> doFloat
     --, placeHook $ smart (0.5, 0.5)
     , transience
-    , pure True -?> insertPosition Below Newer
+    , pure True -?> insertPosition Above Newer
     ]
     where role = stringProperty "WM_WINDOW_ROLE"
 
@@ -158,7 +158,7 @@ myLogHook handle = workspaceNamesPP def
 main :: IO()
 main = do
     xmobarPipe <- spawnPipe "xmobar"
-    xmonad $ ewmh def { terminal = myTerminal
+    xmonad $ docks def { terminal = myTerminal
                            , modMask = myModMask
                            , borderWidth = myBorderWidth
                            , normalBorderColor = myNormalBorderColor
