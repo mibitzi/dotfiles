@@ -126,7 +126,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 -- Layout hook
-myLayout = smartBorders . avoidStruts . smartSpacing 3 $ tall ||| Full
+myLayout = smartBorders . avoidStruts . smartSpacing 3 $ tall ||| noBorders Full
     where tall = Tall 1 (3/100) (1/2)
 
 -- Manage hook
