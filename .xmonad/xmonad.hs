@@ -126,7 +126,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 -- Layout hook
-myLayout = smartBorders . avoidStruts . smartSpacing 3 $ tall ||| Full
+myLayout = smartBorders . avoidStruts . smartSpacing 3 $ tall ||| noBorders Full
     where tall = Tall 1 (3/100) (1/2)
 
 -- Manage hook
@@ -135,10 +135,11 @@ myManageHook = manageDocks <+> composeOne
     , isDialog -?> doCenterFloat
     , role =? "Preferences" -?> doFloat
     , className =? "Pidgin" -?> doFloat
-    , className =? "Lxappereance" -?> doFloat
+    , className =? "Lxappereance" -?> doCenterFloat
     , className =? "Skype" -?> doFloat
-    , className =? "Vlc" -?> doFloat
-    , title =? "Volume Control" -?> doFloat
+    , className =? "Vlc" -?> doCenterFloat
+    , className =? "RoboSim" -?> doCenterFloat
+    , title =? "Volume Control" -?> doCenterFloat
     --, placeHook $ smart (0.5, 0.5)
     , transience
     , pure True -?> insertPosition Above Newer

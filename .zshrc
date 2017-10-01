@@ -100,6 +100,10 @@ export PATH=$PATH:~/app/activator
 export _JAVA_AWT_WM_NONREPARENTING=1
 #}}}
 
+#{{{
+export TERM=xterm
+#}}}
+
 #{{{ Prompt
 PROMPT='%{$fg_bold[green]%}%T %{$fg[cyan]%}%c$(git_prompt_info)%{$reset_color%} '
 
