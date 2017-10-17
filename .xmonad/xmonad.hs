@@ -138,7 +138,6 @@ myManageHook = manageDocks <+> composeOne
     , className =? "Lxappereance" -?> doCenterFloat
     , className =? "Skype" -?> doFloat
     , className =? "Vlc" -?> doCenterFloat
-    , className =? "RoboSim" -?> doCenterFloat
     , title =? "Volume Control" -?> doCenterFloat
     --, placeHook $ smart (0.5, 0.5)
     , transience
@@ -161,7 +160,6 @@ main = do
     xmobarPipe <- spawnPipe "xmobar"
     xmonad $ docks def { terminal = myTerminal
                            , modMask = myModMask
-                           , font = "xft:SourceCodeProSemibold-8"
                            , borderWidth = myBorderWidth
                            , normalBorderColor = myNormalBorderColor
                            , focusedBorderColor = myFocusedBorderColor
