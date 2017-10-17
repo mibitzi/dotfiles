@@ -161,6 +161,7 @@ main = do
     xmobarPipe <- spawnPipe "xmobar"
     xmonad $ docks def { terminal = myTerminal
                            , modMask = myModMask
+                           , font = "xft:SourceCodeProSemibold-8"
                            , borderWidth = myBorderWidth
                            , normalBorderColor = myNormalBorderColor
                            , focusedBorderColor = myFocusedBorderColor

@@ -85,7 +85,7 @@ export PATH=$PATH:$GOPATH/bin
 #}}}
 
 #{{{ Ruby
-export PATH=$PATH:$(ruby -rubygems -e "puts Gem.user_dir")/bin
+#export PATH=$PATH:$(ruby -rubygems -e "puts Gem.user_dir")/bin
 #}}}
 
 #{{{ android
@@ -98,6 +98,15 @@ export PATH=$PATH:~/app/activator
 
 #{{{ xmonad
 export _JAVA_AWT_WM_NONREPARENTING=1
+#}}}
+
+#{{{ ssh agent
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent > ~/.ssh-agent
+fi
+if [[ "$SSH_AGENT_PID" == "" ]]; then
+    eval "$(<~/.ssh-agent)" > /dev/null
+fi
 #}}}
 
 #{{{
