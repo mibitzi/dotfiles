@@ -43,6 +43,13 @@ myWorkspaces = map show [1 .. 9 :: Int] ++ ["0", "'", "^"]
 -- Browser
 myBrowser = "google-chrome-stable"
 
+-- Prompt
+myPrompt = def { font = "xft:SourceCodeProSemibold-9"
+		 , height = 25 }
+
+-- Focus
+myFocusFollowsMouse = True
+
 -- Keybindings
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- Launch terminal
@@ -80,10 +87,13 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. shiftMask, xK_q     ), spawn "xmonad --recompile && xmonad --restart")
 
     -- Rename workspace
-    , ((modMask,               xK_n     ), renameWorkspace def)
+    , ((modMask,               xK_n     ), renameWorkspace myPrompt)
 
     -- Shell prompt
-    , ((modMask,               xK_p     ), shellPrompt def)
+    , ((modMask,               xK_p     ), shellPrompt myPrompt)
+
+    -- Lock screen
+    , ((modMask .|. controlMask, xK_l   ), spawn "xautolock -locknow")
 
     -- Media keys
     , ((0, xF86XK_AudioLowerVolume      ), spawn "pulseaudio-ctl down 2")
@@ -162,6 +172,7 @@ main = do
                            , modMask = myModMask
                            , borderWidth = myBorderWidth
                            , normalBorderColor = myNormalBorderColor
+                           , focusFollowsMouse = myFocusFollowsMouse
                            , focusedBorderColor = myFocusedBorderColor
                            , XMonad.workspaces = myWorkspaces
                            , manageHook=myManageHook <+> manageHook def

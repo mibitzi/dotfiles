@@ -1,4 +1,4 @@
-Config { font = "xft:SourceCodeProSemibold-8"
+Config { font = "xft:SourceCodeProSemibold-9"
         , bgColor = "black"
         , fgColor = "grey"
         , position = TopW L 98
@@ -11,15 +11,15 @@ Config { font = "xft:SourceCodeProSemibold-8"
         , Run Com "sh" ["-c", "cat /proc/loadavg | awk '{print $1,$2,$3}'"] "loadavg" 10
         , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
         , Run DiskU [("/", "/ <usedp>%"), ("/home", "/home <usedp>%")] [] 20
-        , Run Battery
-        [ "-t", "<acstatus> <timeleft> (<left>%)"
-          , "-L", "10", "-H", "80"
-          , "--", "-O", "<fc=green>AC</fc>", "-o", "<fc=orange>BAT</fc>"
-          , "-L", "-15", "-H", "-5"
-          , "-l", "red", "-m", "cyan", "-h", "green"] 100
+        --, Run Battery
+        --[ "-t", "<acstatus> <timeleft> (<left>%)"
+        --  , "-L", "10", "-H", "80"
+        --  , "--", "-O", "<fc=green>AC</fc>", "-o", "<fc=orange>BAT</fc>"
+        --  , "-L", "-15", "-H", "-5"
+        --  , "-l", "red", "-m", "cyan", "-h", "green"] 100
         -- , Run Com "sh" ["-c", "pulseaudio-ctl full-status | awk '{printf(\"Vol %d%%\\n\", $1)}'"] "volume" 10
         ]
         , sepChar = "%"
         , alignSep = "}{"
-        , template = "%StdinReader% }{ %uname% | Load: %loadavg% | %memory% | %swap% | %disku% | %battery% | %LSZH% | <fc=#ffaf00>%date%</fc>   "
+        , template = "%StdinReader% }{ %uname% | Load: %loadavg% | %memory% | %swap% | %disku% | %LSZH% | <fc=#ffaf00>%date%</fc>   "
 }

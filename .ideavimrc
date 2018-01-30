@@ -1,1 +1,23 @@
 set surround
+set ignorecase
+set smartcase
+set incsearch
+
+" Integrate with system clipboard
+set clipboard=unnamedplus,unnamed
+
+let mapleader = ","
+
+map <C-w>o :action MoveEditorToOppositeTabGroup<CR>
+
+map / :action Find<CR>
+map n :action FindNext<CR>
+map N :action FindPrevious<CR>
+
+map <leader>d :action GotoDeclaration<CR>
+map <leader>b :action Back<CR>
+map <leader>f :action Forward<CR>
+map <leader>s :action GotoSymbol<CR>
+
+" Won't work in visual mode (with vmap) for some reason.
+map <leader>c :action CommentByLineComment<CR>
