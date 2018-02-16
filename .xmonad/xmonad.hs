@@ -10,6 +10,8 @@ import XMonad.Actions.WorkspaceNames
 import XMonad.Prompt
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Spacing
+import XMonad.Layout.MouseResizableTile
+import XMonad.Layout.Magnifier
 import XMonad.Actions.SpawnOn
 import XMonad.Actions.CycleWS
 import XMonad.StackSet
@@ -64,7 +66,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- Move focus
     , ((modMask,               xK_j     ), windows W.focusDown)
     , ((modMask,               xK_k     ), windows W.focusUp)
-    , ((modMask,               xK_m     ), windows W.focusMaster)
 
     -- modifying the window order
     , ((modMask .|. shiftMask, xK_Return), windows W.swapMaster)
@@ -72,8 +73,12 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask .|. shiftMask, xK_k     ), windows W.swapUp)
 
     -- resizing the master/slave ratio
+    , ((modMask .|. shiftMask, xK_h     ), sendMessage ShrinkSlave)
+    , ((modMask .|. shiftMask, xK_l     ), sendMessage ExpandSlave)
     , ((modMask,               xK_h     ), sendMessage Shrink)
     , ((modMask,               xK_l     ), sendMessage Expand)
+
+    , ((modMask,               xK_m     ), sendMessage Toggle)
 
     -- floating layer support
     , ((modMask .|. shiftMask, xK_space ), withFocused $ windows . W.sink)
@@ -90,7 +95,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_n     ), renameWorkspace myPrompt)
 
     -- Shell prompt
-    , ((modMask,               xK_p     ), shellPrompt myPrompt)
+    , ((modMask,               xK_p     ), spawn "rofi -show combi")
 
     -- Lock screen
     , ((modMask .|. controlMask, xK_l   ), spawn "xautolock -locknow")
@@ -136,7 +141,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 -- Layout hook
-myLayout = smartBorders . avoidStruts . smartSpacing 3 $ tall ||| noBorders Full
+myLayout = smartBorders . avoidStruts . smartSpacing 3 $ (magnifiercz 1.3 $ mouseResizableTile) ||| noBorders Full
     where tall = Tall 1 (3/100) (1/2)
 
 -- Manage hook
@@ -168,15 +173,15 @@ myLogHook handle = workspaceNamesPP def
 main :: IO()
 main = do
     xmobarPipe <- spawnPipe "xmobar"
-    xmonad $ docks def { terminal = myTerminal
-                           , modMask = myModMask
-                           , borderWidth = myBorderWidth
-                           , normalBorderColor = myNormalBorderColor
-                           , focusFollowsMouse = myFocusFollowsMouse
-                           , focusedBorderColor = myFocusedBorderColor
-                           , XMonad.workspaces = myWorkspaces
-                           , manageHook=myManageHook <+> manageHook def
-                           , layoutHook=myLayout
-                           , logHook = myLogHook xmobarPipe
-                           , keys = \c -> myKeys c
-                           }
+    xmonad $ ewmh $ docks def { terminal = myTerminal
+                              , modMask = myModMask
+                              , borderWidth = myBorderWidth
+                              , normalBorderColor = myNormalBorderColor
+                              , focusFollowsMouse = myFocusFollowsMouse
+                              , focusedBorderColor = myFocusedBorderColor
+                              , XMonad.workspaces = myWorkspaces
+                              , manageHook=myManageHook <+> manageHook def
+                              , layoutHook=myLayout
+                              , logHook = myLogHook xmobarPipe
+                              , keys = \c -> myKeys c
+                              }
