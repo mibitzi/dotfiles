@@ -17,6 +17,7 @@ map N :action FindPrevious<CR>
 map <leader>d :action GotoDeclaration<CR>
 map <leader>f :action FileStructurePopup<CR>
 map <leader>s :action GotoSymbol<CR>
+map <leader>p :action FindInPath<CR>
 
 " Won't work in visual mode (with vmap) for some reason.
-map <leader>c :action CommentByLineComment<CR>
+"map <leader>c :action CommentByLineComment<CR>

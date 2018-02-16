@@ -11,7 +11,7 @@ import XMonad.Prompt
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Spacing
 import XMonad.Layout.MouseResizableTile
-import XMonad.Layout.Magnifier
+import XMonad.Layout.Magnifier as Mag
 import XMonad.Actions.SpawnOn
 import XMonad.Actions.CycleWS
 import XMonad.StackSet
@@ -78,7 +78,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_h     ), sendMessage Shrink)
     , ((modMask,               xK_l     ), sendMessage Expand)
 
-    , ((modMask,               xK_m     ), sendMessage Toggle)
+    , ((modMask,               xK_m     ), sendMessage Mag.Toggle)
 
     -- floating layer support
     , ((modMask .|. shiftMask, xK_space ), withFocused $ windows . W.sink)
@@ -95,7 +95,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_n     ), renameWorkspace myPrompt)
 
     -- Shell prompt
-    , ((modMask,               xK_p     ), spawn "rofi -show combi")
+    , ((modMask,               xK_p     ), spawn "rofi -theme Monokai -matching fuzzy -show combi")
 
     -- Lock screen
     , ((modMask .|. controlMask, xK_l   ), spawn "xautolock -locknow")
@@ -141,7 +141,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 -- Layout hook
-myLayout = smartBorders . avoidStruts . smartSpacing 3 $ (magnifiercz 1.3 $ mouseResizableTile) ||| noBorders Full
+myLayout = smartBorders . avoidStruts . smartSpacing 3 $ (Mag.magnifiercz 1.3 $ mouseResizableTile) ||| noBorders Full
     where tall = Tall 1 (3/100) (1/2)
 
 -- Manage hook
