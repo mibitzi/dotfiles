@@ -144,7 +144,7 @@ myLayout = smartBorders . avoidStruts . smartSpacing 3 $ mouseResizableTile ||| 
 -- Manage hook
 myManageHook = manageDocks <+> composeOne
     [ isFullscreen -?> doFullFloat
-    , isDialog -?> doCenterFloat
+    --, isDialog -?> doCenterFloat <-- breaks pycharm context menus
     , role =? "Preferences" -?> doFloat
     , className =? "Pidgin" -?> doFloat
     , className =? "Lxappereance" -?> doCenterFloat

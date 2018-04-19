@@ -63,6 +63,7 @@ setopt no_share_history
 alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -i"
+alias gspa="git stash && git pull && git stash apply"
 #}}}
 
 #{{{ Editor

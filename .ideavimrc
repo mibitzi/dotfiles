@@ -9,15 +9,19 @@ set clipboard=unnamedplus,unnamed
 let mapleader = ","
 
 map <C-w>o :action MoveEditorToOppositeTabGroup<CR>
+map <C-o> :action Back<CR>
+map <C-i> :action Forward<CR>
 
 map / :action Find<CR>
 map n :action FindNext<CR>
 map N :action FindPrevious<CR>
 
 map <leader>d :action GotoDeclaration<CR>
-map <leader>f :action FileStructurePopup<CR>
-map <leader>s :action GotoSymbol<CR>
+map <leader>s :action FileStructurePopup<CR>
+map <leader>y :action GotoSymbol<CR>
 map <leader>p :action FindInPath<CR>
+map <leader>c :action GotoClass<CR>
+map <leader>f :action GotoFile<CR>
 
 " Won't work in visual mode (with vmap) for some reason.
 "map <leader>c :action CommentByLineComment<CR>
