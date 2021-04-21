@@ -4,20 +4,12 @@ Config { font = "xft:SourceCodeProSemibold-9"
         , position = TopW L 98
         , commands = [ Run StdinReader
         , Run Weather "LSZH" ["-t","<skyCondition> <tempC>C","-L","18","-H","25","--normal","green","--high","red","--low","lightblue"] 36000
-        --, Run Memory ["-t", "Mem: <usedratio>%"] 20
         , Run Memory ["-t", "Mem: <usedratio>%", "-H", "90", "-L", "50", "--high", "red", "--low", "lightblue"] 10
         , Run Swap ["-t", "Swap: <usedratio>%"] 100
         , Run Com "uname" ["-s","-r"] "" 36000
         , Run Com "sh" ["-c", "cat /proc/loadavg | awk '{print $1,$2,$3}'"] "loadavg" 10
         , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
         , Run DiskU [("/", "/ <usedp>%"), ("/home", "/home <usedp>%")] [] 20
-        --, Run Battery
-        --[ "-t", "<acstatus> <timeleft> (<left>%)"
-        --  , "-L", "10", "-H", "80"
-        --  , "--", "-O", "<fc=green>AC</fc>", "-o", "<fc=orange>BAT</fc>"
-        --  , "-L", "-15", "-H", "-5"
-        --  , "-l", "red", "-m", "cyan", "-h", "green"] 100
-        -- , Run Com "sh" ["-c", "pulseaudio-ctl full-status | awk '{printf(\"Vol %d%%\\n\", $1)}'"] "volume" 10
         ]
         , sepChar = "%"
         , alignSep = "}{"

@@ -5,6 +5,7 @@ set incsearch
 
 " Integrate with system clipboard
 set clipboard=unnamedplus,unnamed
+" set clipboard+=ideaput
 
 let mapleader = ","
 
@@ -16,12 +17,15 @@ map / :action Find<CR>
 map n :action FindNext<CR>
 map N :action FindPrevious<CR>
 
+map <leader>a :action Annotate<CR>
 map <leader>d :action GotoDeclaration<CR>
+map <leader>e :action GotoTypeDeclaration<CR>
+map <leader>m :action GotoImplementation<CR>
 map <leader>s :action FileStructurePopup<CR>
 map <leader>y :action GotoSymbol<CR>
+map <leader>u :action GotoSuperMethod<CR>
 map <leader>p :action FindInPath<CR>
 map <leader>c :action GotoClass<CR>
 map <leader>f :action GotoFile<CR>
-
-" Won't work in visual mode (with vmap) for some reason.
-"map <leader>c :action CommentByLineComment<CR>
+map <leader>t :action GotoTest<CR>
+map <leader>o :action OptimizeImports<CR>

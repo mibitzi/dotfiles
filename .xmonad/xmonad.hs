@@ -92,7 +92,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_n     ), renameWorkspace myPrompt)
 
     -- Shell prompt
-    , ((modMask,               xK_p     ), spawn "rofi -theme Monokai -matching fuzzy -show combi")
+    , ((modMask,               xK_p     ), spawn "rofi -theme Monokai -matching fuzzy -show run")
 
     -- Lock screen
     , ((modMask .|. controlMask, xK_l   ), spawn "xautolock -locknow")
@@ -144,8 +144,9 @@ myLayout = smartBorders . avoidStruts . smartSpacing 3 $ mouseResizableTile ||| 
 -- Manage hook
 myManageHook = manageDocks <+> composeOne
     [ isFullscreen -?> doFullFloat
-    --, isDialog -?> doCenterFloat <-- breaks pycharm context menus
+    --, isDialog -?> doCenterFloat breaks pycharm 2018.1
     , role =? "Preferences" -?> doFloat
+    , className =? "Tilda" -?> doFloat
     , className =? "Pidgin" -?> doFloat
     , className =? "Lxappereance" -?> doCenterFloat
     , className =? "Skype" -?> doFloat

@@ -63,7 +63,7 @@ setopt no_share_history
 alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -i"
-alias gspa="git stash && git pull && git stash apply"
+alias gspp="git stash && git pull && git stash pop"
 #}}}
 
 #{{{ Editor
@@ -86,7 +86,7 @@ export PATH=$PATH:$GOPATH/bin
 #}}}
 
 #{{{ Ruby
-#export PATH=$PATH:$(ruby -rubygems -e "puts Gem.user_dir")/bin
+export PATH=$PATH:$(ruby -r rubygems -e "puts Gem.user_dir")/bin
 #}}}
 
 #{{{ android
