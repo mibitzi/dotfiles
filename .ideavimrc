@@ -2,12 +2,16 @@ set surround
 set ignorecase
 set smartcase
 set incsearch
+set visualbell
+set noerrorbells
 
 " Integrate with system clipboard
 set clipboard=unnamedplus,unnamed
 " set clipboard+=ideaput
 
 let mapleader = ","
+
+Plug 'easymotion/vim-easymotion'
 
 map <C-w>o :action MoveEditorToOppositeTabGroup<CR>
 map <C-o> :action Back<CR>
@@ -29,3 +33,7 @@ map <leader>c :action GotoClass<CR>
 map <leader>f :action GotoFile<CR>
 map <leader>t :action GotoTest<CR>
 map <leader>o :action OptimizeImports<CR>
+"map <C-S> <Action>(ReformatCode)<Action>(SaveAll)
+map <C-S> <Action>(SaveAll)
+map <C-O> <Action>(Back)
+map <C-I> <Action>(Forward)
